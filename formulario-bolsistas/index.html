@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório Mensal de Atividades — Cidades Inteligentes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Overlay de carregamento -->
+  <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p>Enviando formulário...</p>
+    </div>
+  </div>
+
+  <!-- Mensagem de sucesso -->
+  <div id="success-message" class="feedback-message success hidden">
+    <div class="feedback-content">
+      <span class="feedback-icon">&#10004;</span>
+      <h2>Formulário enviado com sucesso!</h2>
+      <p>Seus dados foram registrados na planilha. Obrigado pelo preenchimento.</p>
+      <button type="button" onclick="dismissSuccess()">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Mensagem de erro -->
+  <div id="error-message" class="feedback-message error hidden">
+    <div class="feedback-content">
+      <span class="feedback-icon">&#10008;</span>
+      <h2>Erro ao enviar formulário</h2>
+      <p id="error-detail">Ocorreu um problema. Tente novamente.</p>
+      <button type="button" onclick="dismissError()">Fechar</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="form-header">
+      <h1>Relatório Mensal de Atividades</h1>
+      <p class="subtitle">Projeto Cidades Inteligentes — Municípios</p>
+      <p class="description">
+        Preencha este formulário para registrar suas atividades mensais.
+        Campos marcados com <span class="required-mark">*</span> são obrigatórios.
+      </p>
+    </header>
+
+    <form id="main-form" novalidate>
+
+      <!-- ============================================ -->
+      <!-- BLOCO 1 — Identificação do Bolsista          -->
+      <!-- ============================================ -->
+      <fieldset class="form-block">
+        <legend>Bloco 1 — Identificação do Bolsista</legend>
+
+        <div class="field">
+          <label for="nome_completo">Nome completo <span class="required-mark">*</span></label>
+          <input type="text" id="nome_completo" name="nome_completo" required placeholder="Seu nome completo">
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="mes_referencia">Mês de referência <span class="required-mark">*</span></label>
+            <select id="mes_referencia" name="mes_referencia" required>
+              <option value="">Selecione o mês</option>
+              <option value="Janeiro">Janeiro</option>
+              <option value="Fevereiro">Fevereiro</option>
+              <option value="Março">Março</option>
+              <option value="Abril">Abril</option>
+              <option value="Maio">Maio</option>
+              <option value="Junho">Junho</option>
+              <option value="Julho">Julho</option>
+              <option value="Agosto">Agosto</option>
+              <option value="Setembro">Setembro</option>
+              <option value="Outubro">Outubro</option>
+              <option value="Novembro">Novembro</option>
+              <option value="Dezembro">Dezembro</option>
+            </select>
+            <span class="error-text"></span>
+          </div>
+          <div class="field">
+            <label for="ano_referencia">Ano de referência <span class="required-mark">*</span></label>
+            <select id="ano_referencia" name="ano_referencia" required>
+              <option value="">Selecione o ano</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+            </select>
+            <span class="error-text"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="coordenador_tecnico">Coordenador técnico vinculado <span class="required-mark">*</span></label>
+          <select id="coordenador_tecnico" name="coordenador_tecnico" required>
+            <option value="">Selecione o coordenador</option>
+            <option value="Jeime Nunes">Jeime Nunes</option>
+            <option value="Jonatas Bastos">Jonatas Bastos</option>
+            <option value="Leandro Oliveira">Leandro Oliveira</option>
+            <option value="Ronilson Oliveira">Ronilson Oliveira</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="municipio_vinculo">Município de vínculo <span class="required-mark">*</span></label>
+          <select id="municipio_vinculo" name="municipio_vinculo" required>
+            <option value="">Selecione o município</option>
+            <option value="Ibititá">Ibititá</option>
+            <option value="Irecê">Irecê</option>
+            <option value="Presidente Dutra">Presidente Dutra</option>
+            <option value="São Gabriel">São Gabriel</option>
+            <option value="Uibaí">Uibaí</option>
+            <option value="Lapão">Lapão</option>
+            <option value="Barra">Barra</option>
+            <option value="Morro do Chapéu">Morro do Chapéu</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="atuou_mais_municipio">Atuou em mais de um município no mês? <span class="required-mark">*</span></label>
+            <select id="atuou_mais_municipio" name="atuou_mais_municipio" required>
+              <option value="">Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+            <span class="error-text"></span>
+          </div>
+          <div class="field">
+            <label for="atuou_mais_time">Atuou em mais de um time/projeto no mês? <span class="required-mark">*</span></label>
+            <select id="atuou_mais_time" name="atuou_mais_time" required>
+              <option value="">Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+            <span class="error-text"></span>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ============================================ -->
+      <!-- BLOCO 2 — Dados Gerais da Atividade          -->
+      <!-- ============================================ -->
+      <fieldset class="form-block">
+        <legend>Bloco 2 — Dados Gerais da Atividade</legend>
+
+        <div class="field">
+          <label for="municipio_atividade">Município da atividade <span class="required-mark">*</span></label>
+          <select id="municipio_atividade" name="municipio_atividade" required>
+            <option value="">Selecione o município</option>
+            <option value="Ibititá">Ibititá</option>
+            <option value="Irecê">Irecê</option>
+            <option value="Presidente Dutra">Presidente Dutra</option>
+            <option value="São Gabriel">São Gabriel</option>
+            <option value="Uibaí">Uibaí</option>
+            <option value="Lapão">Lapão</option>
+            <option value="Barra">Barra</option>
+            <option value="Morro do Chapéu">Morro do Chapéu</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="time_projeto">Time/projeto da atividade <span class="required-mark">*</span></label>
+          <select id="time_projeto" name="time_projeto" required>
+            <option value="">Selecione o time/projeto</option>
+            <option value="Mapeamento de processos">Mapeamento de processos</option>
+            <option value="Mapeamento de unidades/usuários SEI">Mapeamento de unidades/usuários SEI</option>
+            <option value="Suporte ao usuário SEI">Suporte ao usuário SEI</option>
+            <option value="Implantação do SEI">Implantação do SEI</option>
+            <option value="Implantação do E-Cidade">Implantação do E-Cidade</option>
+            <option value="Desenvolvimento do sistema Conecta">Desenvolvimento do sistema Conecta</option>
+            <option value="Desenvolvimento do aplicativo Conecta Irecê">Desenvolvimento do aplicativo Conecta Irecê</option>
+            <option value="DocDigital.IA">DocDigital.IA</option>
+            <option value="Plataforma PNAB">Plataforma PNAB</option>
+            <option value="Plataforma de Processos">Plataforma de Processos</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="frente_solucao">Frente/Solução <span class="required-mark">*</span></label>
+          <input type="text" id="frente_solucao" name="frente_solucao" required placeholder="Ex.: Frente de digitalização">
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="titulo_atividade">Título curto da atividade <span class="required-mark">*</span></label>
+          <input type="text" id="titulo_atividade" name="titulo_atividade" required placeholder="Ex.: Mapeamento de processos na Secretaria de Saúde">
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="descricao_atividade">Descrição objetiva da atividade <span class="required-mark">*</span></label>
+          <textarea id="descricao_atividade" name="descricao_atividade" required rows="4" placeholder="Descreva de forma clara o que foi realizado"></textarea>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="data_periodo">Data ou período da atividade <span class="required-mark">*</span></label>
+            <input type="text" id="data_periodo" name="data_periodo" required placeholder="Ex.: 01/03 a 15/03">
+            <span class="error-text"></span>
+          </div>
+          <div class="field">
+            <label for="carga_horaria">Carga horária <span class="required-mark">*</span></label>
+            <input type="text" id="carga_horaria" name="carga_horaria" required placeholder="Ex.: 20h">
+            <span class="error-text"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="tipo_atividade">Tipo de atividade <span class="required-mark">*</span></label>
+          <select id="tipo_atividade" name="tipo_atividade" required>
+            <option value="">Selecione</option>
+            <option value="Levantamento/Pesquisa">Levantamento/Pesquisa</option>
+            <option value="Desenvolvimento">Desenvolvimento</option>
+            <option value="Implantação">Implantação</option>
+            <option value="Capacitação/Treinamento">Capacitação/Treinamento</option>
+            <option value="Suporte">Suporte</option>
+            <option value="Reunião">Reunião</option>
+            <option value="Documentação">Documentação</option>
+            <option value="Teste/Validação">Teste/Validação</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field hidden" id="tipo_atividade_outro_wrapper">
+          <label for="tipo_atividade_outro">Especifique o tipo de atividade</label>
+          <input type="text" id="tipo_atividade_outro" name="tipo_atividade_outro" placeholder="Descreva o tipo">
+        </div>
+
+        <div class="field">
+          <label for="forma_execucao">Essa atividade foi: <span class="required-mark">*</span></label>
+          <select id="forma_execucao" name="forma_execucao" required>
+            <option value="">Selecione</option>
+            <option value="Individual">Individual</option>
+            <option value="Em dupla">Em dupla</option>
+            <option value="Em equipe">Em equipe</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="ferramentas">Ferramenta usada na atividade</label>
+          <input type="text" id="ferramentas" name="ferramentas" placeholder="Ex.: Google Docs, VS Code, SEI">
+        </div>
+
+        <div class="field">
+          <label for="secretaria_setor_unidade">Secretaria, setor ou unidade atendida</label>
+          <input type="text" id="secretaria_setor_unidade" name="secretaria_setor_unidade" placeholder="Ex.: Secretaria de Saúde">
+        </div>
+
+        <div class="field">
+          <label for="meta_mes">Essa atividade estava vinculada a qual objetivo/meta do mês?</label>
+          <textarea id="meta_mes" name="meta_mes" rows="2" placeholder="Descreva o objetivo ou meta"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- ============================================ -->
+      <!-- BLOCO 3 — Seção Específica por Time           -->
+      <!-- ============================================ -->
+      <fieldset class="form-block" id="team-specific-block" style="display:none;">
+        <legend id="team-specific-legend">Bloco 3 — Detalhamento por Time</legend>
+        <div id="team-specific-fields"></div>
+      </fieldset>
+
+      <!-- ============================================ -->
+      <!-- BLOCO 4 — Bloco Final Comum                   -->
+      <!-- ============================================ -->
+      <fieldset class="form-block">
+        <legend>Bloco 4 — Resultados e Entregas</legend>
+
+        <div class="field">
+          <label for="status_atividade">Status da atividade <span class="required-mark">*</span></label>
+          <select id="status_atividade" name="status_atividade" required>
+            <option value="">Selecione</option>
+            <option value="Concluída">Concluída</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Pausada">Pausada</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="entrega_gerada">Entrega gerada <span class="required-mark">*</span></label>
+          <textarea id="entrega_gerada" name="entrega_gerada" required rows="2" placeholder="O que foi entregue?"></textarea>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="resultados_concretos">Resultados concretos</label>
+          <textarea id="resultados_concretos" name="resultados_concretos" rows="3" placeholder="Descreva os resultados obtidos"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="produtos_gerados">Produtos/artefatos gerados</label>
+          <textarea id="produtos_gerados" name="produtos_gerados" rows="2" placeholder="Ex.: Documento de mapeamento, relatório, código"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="impacto_principal">Impacto principal</label>
+          <textarea id="impacto_principal" name="impacto_principal" rows="2" placeholder="Qual o impacto dessa atividade?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="indicadores_quantitativos">Indicadores quantitativos</label>
+          <input type="text" id="indicadores_quantitativos" name="indicadores_quantitativos" placeholder="Ex.: 15 processos mapeados, 30 usuários cadastrados">
+        </div>
+
+        <div class="field">
+          <label for="tipo_evidencia">Tipo de evidência</label>
+          <select id="tipo_evidencia" name="tipo_evidencia">
+            <option value="">Selecione</option>
+            <option value="Documento">Documento</option>
+            <option value="Planilha">Planilha</option>
+            <option value="Print/Screenshot">Print/Screenshot</option>
+            <option value="Link de sistema">Link de sistema</option>
+            <option value="Foto">Foto</option>
+            <option value="Vídeo">Vídeo</option>
+            <option value="Ata de reunião">Ata de reunião</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="link_evidencia">Link ou descrição da evidência</label>
+          <input type="text" id="link_evidencia" name="link_evidencia" placeholder="Cole o link ou descreva a evidência">
+        </div>
+
+        <div class="field">
+          <label for="meta_relacionada">Meta relacionada</label>
+          <input type="text" id="meta_relacionada" name="meta_relacionada" placeholder="Qual meta este resultado atende?">
+        </div>
+
+        <div class="field">
+          <label for="situacao_meta">Situação da meta</label>
+          <select id="situacao_meta" name="situacao_meta">
+            <option value="">Selecione</option>
+            <option value="Atingida">Atingida</option>
+            <option value="Parcialmente atingida">Parcialmente atingida</option>
+            <option value="Não atingida">Não atingida</option>
+            <option value="Em andamento">Em andamento</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="contribuicao_meta">Explicação da contribuição para a meta</label>
+          <textarea id="contribuicao_meta" name="contribuicao_meta" rows="2" placeholder="Como essa atividade contribuiu para a meta?"></textarea>
+        </div>
+
+        <!-- Dificuldade -->
+        <div class="field">
+          <label for="houve_dificuldade">Houve dificuldade ou bloqueio? <span class="required-mark">*</span></label>
+          <select id="houve_dificuldade" name="houve_dificuldade" required>
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+          <span class="error-text"></span>
+        </div>
+
+        <div id="difficulty-fields" class="hidden">
+          <div class="field">
+            <label for="tipo_dificuldade">Tipo de dificuldade</label>
+            <select id="tipo_dificuldade" name="tipo_dificuldade">
+              <option value="">Selecione</option>
+              <option value="Técnica">Técnica</option>
+              <option value="Institucional">Institucional</option>
+              <option value="Comunicação">Comunicação</option>
+              <option value="Infraestrutura">Infraestrutura</option>
+              <option value="Dados/Informação">Dados/Informação</option>
+              <option value="Prazo">Prazo</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="descricao_dificuldade">Descrição da dificuldade</label>
+            <textarea id="descricao_dificuldade" name="descricao_dificuldade" rows="2" placeholder="Descreva a dificuldade encontrada"></textarea>
+          </div>
+          <div class="field">
+            <label for="destravamento_necessario">O que precisa para destravar?</label>
+            <textarea id="destravamento_necessario" name="destravamento_necessario" rows="2" placeholder="Ação necessária para resolver"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ============================================ -->
+      <!-- BLOCO 5 — Próximos Passos                     -->
+      <!-- ============================================ -->
+      <fieldset class="form-block">
+        <legend>Bloco 5 — Próximos Passos</legend>
+
+        <div class="field">
+          <label for="proximo_passo">Próximo passo da atividade <span class="required-mark">*</span></label>
+          <textarea id="proximo_passo" name="proximo_passo" required rows="2" placeholder="Qual o próximo passo?"></textarea>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="semana_proximo_mes">Semana prevista do próximo mês</label>
+          <select id="semana_proximo_mes" name="semana_proximo_mes">
+            <option value="">Selecione</option>
+            <option value="Semana 1">Semana 1</option>
+            <option value="Semana 2">Semana 2</option>
+            <option value="Semana 3">Semana 3</option>
+            <option value="Semana 4">Semana 4</option>
+            <option value="Ao longo do mês">Ao longo do mês</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="objetivo_proximo_passo">Objetivo do próximo passo</label>
+          <textarea id="objetivo_proximo_passo" name="objetivo_proximo_passo" rows="2" placeholder="O que se pretende alcançar?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="produto_esperado">Produto esperado do próximo passo</label>
+          <input type="text" id="produto_esperado" name="produto_esperado" placeholder="Ex.: Relatório finalizado, módulo entregue">
+        </div>
+
+        <div class="field">
+          <label for="status_proximo_ciclo">Status do próximo ciclo</label>
+          <select id="status_proximo_ciclo" name="status_proximo_ciclo">
+            <option value="">Selecione</option>
+            <option value="Planejado">Planejado</option>
+            <option value="Em preparação">Em preparação</option>
+            <option value="Aguardando definição">Aguardando definição</option>
+            <option value="Dependente de terceiros">Dependente de terceiros</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <!-- ============================================ -->
+      <!-- BLOCO 6 — Síntese Mensal                      -->
+      <!-- ============================================ -->
+      <fieldset class="form-block">
+        <legend>Bloco 6 — Síntese Mensal</legend>
+
+        <div class="field">
+          <label for="tres_principais_entregas">3 principais entregas do mês <span class="required-mark">*</span></label>
+          <textarea id="tres_principais_entregas" name="tres_principais_entregas" required rows="3" placeholder="Liste as 3 entregas mais relevantes do mês"></textarea>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="atividade_mais_relevante">Atividade mais relevante e justificativa <span class="required-mark">*</span></label>
+          <textarea id="atividade_mais_relevante" name="atividade_mais_relevante" required rows="3" placeholder="Qual foi a atividade mais relevante e por quê?"></textarea>
+          <span class="error-text"></span>
+        </div>
+
+        <div class="field">
+          <label for="resumo_contribuicoes">Resumo breve e objetivo das contribuições <span class="required-mark">*</span></label>
+          <textarea id="resumo_contribuicoes" name="resumo_contribuicoes" required rows="3" placeholder="Resumo das suas contribuições no mês"></textarea>
+          <span class="error-text"></span>
+        </div>
+      </fieldset>
+
+      <!-- Botões -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="btn-submit">Enviar Formulário</button>
+        <button type="button" class="btn btn-secondary" id="btn-reset" onclick="resetForm()">Limpar Formulário</button>
+      </div>
+
+    </form>
+
+    <footer class="form-footer">
+      <p>Projeto Cidades Inteligentes — Municípios &copy; 2026</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
