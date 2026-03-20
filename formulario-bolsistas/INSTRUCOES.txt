@@ -1,0 +1,348 @@
+================================================================
+INSTRUÇÕES DE IMPLANTAÇÃO
+Formulário de Relatório Mensal — Cidades Inteligentes
+================================================================
+
+ESTRUTURA DOS ARQUIVOS
+================================================================
+
+formulario-bolsistas/
+  index.html          — Página principal do formulário
+  style.css           — Estilos visuais (CSS responsivo)
+  script.js           — Lógica do formulário (JavaScript puro)
+  Code.gs             — Backend Google Apps Script
+  INSTRUCOES.txt      — Este arquivo
+
+
+PASSO A PASSO DE IMPLANTAÇÃO
+================================================================
+
+PARTE 1 — CRIAR A PLANILHA GOOGLE SHEETS
+-----------------------------------------
+
+1. Acesse https://sheets.google.com e crie uma nova planilha.
+
+2. Renomeie a planilha para algo como:
+   "Relatórios Bolsistas — Cidades Inteligentes"
+
+3. Copie o ID da planilha da URL. O ID é a parte entre /d/ e /edit.
+   Exemplo de URL:
+     https://docs.google.com/spreadsheets/d/ABC123xyz/edit
+   O ID seria: ABC123xyz
+
+4. Guarde este ID — você vai usá-lo no código do Apps Script.
+
+
+PARTE 2 — CONFIGURAR O GOOGLE APPS SCRIPT
+-------------------------------------------
+
+1. Na planilha, vá em: Extensões > Apps Script
+
+2. Apague todo o código existente no editor.
+
+3. Copie e cole o conteúdo completo do arquivo Code.gs.
+
+4. No código colado, localize a linha:
+     var SPREADSHEET_ID = 'COLE_AQUI_O_ID_DA_SUA_PLANILHA';
+   Substitua 'COLE_AQUI_O_ID_DA_SUA_PLANILHA' pelo ID real
+   que você copiou no passo anterior.
+
+5. Salve o projeto (Ctrl+S) e dê um nome, como:
+   "Script Formulário Bolsistas"
+
+6. CRIAR A ABA COM CABEÇALHOS AUTOMATICAMENTE:
+   a. No editor do Apps Script, no menu de execução (ao lado do botão
+      "Executar"), selecione a função "setupSheet".
+   b. Clique em "Executar".
+   c. Autorize o acesso quando solicitado.
+   d. A aba "respostas_bolsistas" será criada com todos os
+      cabeçalhos já formatados.
+
+   ALTERNATIVA MANUAL: Se preferir, crie a aba manualmente com
+   o nome "respostas_bolsistas" e cole os cabeçalhos listados
+   na seção ESTRUTURA DA PLANILHA abaixo.
+
+
+PARTE 3 — PUBLICAR COMO WEB APP
+---------------------------------
+
+1. No editor do Apps Script, clique em:
+   Implantação > Nova implantação
+
+2. Clique no ícone de engrenagem e selecione "App da Web".
+
+3. Configure:
+   - Descrição: "Formulário Bolsistas v1"
+   - Execute como: "Eu" (sua conta)
+   - Quem pode acessar: "Qualquer pessoa"
+
+4. Clique em "Implantar".
+
+5. Autorize o acesso quando solicitado.
+
+6. COPIE A URL DO WEB APP que será exibida.
+   Ela terá o formato:
+   https://script.google.com/macros/s/XXXXXXXXX/exec
+
+7. Guarde esta URL — você vai usá-la no frontend.
+
+
+PARTE 4 — CONFIGURAR O FRONTEND
+----------------------------------
+
+1. Abra o arquivo script.js em um editor de texto.
+
+2. Localize a linha (no início do arquivo):
+     const APPS_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_SEU_WEB_APP';
+
+3. Substitua 'COLE_AQUI_A_URL_DO_SEU_WEB_APP' pela URL copiada
+   na parte anterior.
+
+4. Salve o arquivo.
+
+
+PARTE 5 — HOSPEDAR O FORMULÁRIO
+----------------------------------
+
+Opção A — Hospedagem simples (GitHub Pages):
+  1. Crie um repositório no GitHub.
+  2. Faça upload dos 3 arquivos (index.html, style.css, script.js).
+  3. Vá em Settings > Pages e ative o GitHub Pages.
+  4. Acesse pelo link gerado.
+
+Opção B — Hospedagem local/servidor:
+  1. Coloque os 3 arquivos em qualquer servidor web.
+  2. Acesse o index.html pelo navegador.
+
+Opção C — Apenas abrir localmente:
+  1. Abra o arquivo index.html diretamente no navegador.
+  2. O formulário funcionará normalmente (o envio usa fetch).
+
+
+PARTE 6 — TESTAR
+-------------------
+
+1. Abra o formulário no navegador.
+2. Preencha todos os campos obrigatórios.
+3. Selecione um time/projeto para ver os campos específicos.
+4. Clique em "Enviar Formulário".
+5. Verifique na planilha se os dados foram inseridos.
+6. Teste em dispositivos móveis para verificar responsividade.
+
+
+ESTRUTURA DA PLANILHA
+================================================================
+
+Aba: respostas_bolsistas
+
+Cabeçalhos (cole na linha 1, uma coluna para cada):
+
+timestamp
+nome_completo
+mes_referencia
+ano_referencia
+coordenador_tecnico
+municipio_vinculo
+atuou_mais_municipio
+atuou_mais_time
+municipio_atividade
+time_projeto
+frente_solucao
+titulo_atividade
+descricao_atividade
+data_periodo
+carga_horaria
+tipo_atividade
+tipo_atividade_outro
+forma_execucao
+ferramentas
+secretaria_setor_unidade
+meta_mes
+mp_onda
+mp_secretarias_visitadas
+mp_qtd_visitas
+mp_formato_visitas
+mp_processos_identificados
+mp_levantados
+mp_detalhados
+mp_modelados
+mp_uso_bpmn
+mp_processos_mapeados
+mp_estagio
+mp_dificuldade
+mp_setores_pendentes
+mp_proxima_acao
+mu_onda
+mu_unidades_identificadas
+mu_unidades_cadastradas
+mu_unidades_revisadas
+mu_usuarios_levantados
+mu_usuarios_cadastrados
+mu_usuarios_atualizados
+mu_usuarios_inativados
+mu_ajuste_perfis
+mu_correcao_cadastral
+mu_ambiente
+mu_secretarias_contempladas
+mu_pendencias
+mu_proximo_passo
+su_atendimentos
+su_tipo_atendimento
+su_canal
+su_cidade
+su_secretaria
+su_problema_resolvido
+su_tempo_medio
+su_encaminhamento
+su_recorrencias
+su_necessidade_capacitacao
+su_proximo_passo
+is_onda
+is_etapa
+is_secretarias
+is_reuniao_gestores
+is_capacitacao
+is_num_servidores
+is_parametrizacao
+is_producao_materiais
+is_situacao_atual
+is_entraves
+is_proximos_passos
+ec_modulo
+ec_tipo_atividade
+ec_setor
+ec_levantamento_dados
+ec_parametrizacao
+ec_treinamento
+ec_qtd_usuarios
+ec_dados_legados
+ec_situacao_atual
+ec_proximo_passo
+dc_modulo
+dc_atividade_tecnica
+dc_card_jira
+dc_funcionalidade
+dc_entrega_ambiente
+dc_teste_usuario
+dc_bloqueio_tecnico
+dc_link_pr
+dc_proximo_passo
+ci_funcionalidade
+ci_camada
+ci_atividade
+ci_integracao
+ci_impedimento
+ci_entrega
+ci_proxima_funcionalidade
+dd_frente
+dd_tipo_atividade
+dd_teste_docs
+dd_qtd_docs
+dd_ajuste
+dd_implantacao_municipio
+dd_proximo_passo
+pn_frente
+pn_tipo_atividade
+pn_entrega_funcional
+pn_validacao_secretaria
+pn_ajuste_normativo
+pn_proximo_passo
+pp_frente
+pp_tipo_atividade
+pp_processo_modelo
+pp_homologacao
+pp_reuniao_setor
+pp_proximo_passo
+status_atividade
+entrega_gerada
+resultados_concretos
+produtos_gerados
+impacto_principal
+indicadores_quantitativos
+tipo_evidencia
+link_evidencia
+meta_relacionada
+situacao_meta
+contribuicao_meta
+houve_dificuldade
+tipo_dificuldade
+descricao_dificuldade
+destravamento_necessario
+proximo_passo
+semana_proximo_mes
+objetivo_proximo_passo
+produto_esperado
+status_proximo_ciclo
+tres_principais_entregas
+atividade_mais_relevante
+resumo_contribuicoes
+
+
+COMO CUSTOMIZAR NO FUTURO
+================================================================
+
+1. ADICIONAR NOVOS CAMPOS:
+   - Adicione o campo HTML no index.html (dentro do fieldset apropriado)
+   - O script.js coleta automaticamente todos os campos com name=""
+   - Adicione o nome do campo na lista HEADERS do Code.gs
+   - Adicione o cabeçalho na planilha
+
+2. ADICIONAR NOVO TIME/PROJETO:
+   - Adicione a <option> no select "time_projeto" em index.html
+   - Adicione o case correspondente na função getTeamFields() em script.js
+   - Adicione os novos campos na lista HEADERS do Code.gs
+   - Adicione os cabeçalhos na planilha
+
+3. ADICIONAR NOVO MUNICÍPIO:
+   - Adicione a <option> nos selects de município em index.html
+
+4. ADICIONAR NOVO COORDENADOR:
+   - Adicione a <option> no select "coordenador_tecnico" em index.html
+
+5. ALTERAR CORES/ESTILO:
+   - Edite as variáveis CSS no :root do style.css
+   - As cores principais são:
+     --primary: azul institucional
+     --accent: verde dos botões
+     --danger: vermelho dos erros
+
+6. ATUALIZAR O WEB APP APÓS MUDANÇAS NO CODE.GS:
+   - No editor do Apps Script, vá em:
+     Implantação > Gerenciar implantações
+   - Clique em "Editar" na implantação existente
+   - Mude a versão para "Nova versão"
+   - Clique em "Implantar"
+   - A URL permanece a mesma
+
+7. ADICIONAR VALIDAÇÕES EXTRAS:
+   - Edite a função validateForm() em script.js
+   - Adicione suas regras de validação personalizadas
+
+8. CAMPOS OBRIGATÓRIOS:
+   - Adicione o atributo "required" ao campo HTML
+   - Adicione <span class="required-mark">*</span> ao label
+   - Adicione <span class="error-text"></span> após o campo
+   - A validação será feita automaticamente
+
+
+SOLUÇÃO DE PROBLEMAS
+================================================================
+
+PROBLEMA: Dados não aparecem na planilha
+  - Verifique se o ID da planilha está correto no Code.gs
+  - Verifique se a URL do Web App está correta no script.js
+  - Verifique se a aba "respostas_bolsistas" existe
+  - Reimplante o script como nova versão
+
+PROBLEMA: Erro de autorização
+  - Reimplante o Web App e autorize novamente
+  - Verifique se "Quem pode acessar" está como "Qualquer pessoa"
+
+PROBLEMA: Formulário não envia
+  - Abra o console do navegador (F12) e veja se há erros
+  - Verifique se a URL do Web App está correta
+  - Teste a URL no navegador (deve mostrar mensagem de GET)
+
+PROBLEMA: Campos específicos não aparecem
+  - Verifique se selecionou um time/projeto no dropdown
+  - Verifique o console do navegador por erros JavaScript
